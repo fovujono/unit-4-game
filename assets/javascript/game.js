@@ -2,10 +2,11 @@
 $(document).ready(function () {
 
     //Target Number
-    var targetNumber = 120;
+    var targetNumber = Math.floor(Math.random() * (120 - 20 + 1)) +20;
 
-    $("#randomNumberParagraph").text(targetNumber);
-    // counting the number of doughnuts 
+    $("#randomNumberParagraph").html(targetNumber); 
+
+    // counting the number of Current Doughnuts 
     var counter = 0;
     var victory = 0;
     var defeat = 0;
@@ -17,16 +18,17 @@ $(document).ready(function () {
     console.log(random)
     $("#d1").on("click", function () {
         counter += random;
-        score();
-        alert("Your score is " + counter + " doughnuts!");
+        winLoss();
+        document.getElementById('yourScoreNumber').innerHTML = "Your Current Doughnuts " + counter;//updates current score in html
         //winning condition
         if (counter === targetNumber) {
             alert("You Win :)")
-
+            reset();
         }
         //losing condition
         else if (counter >= targetNumber) {
             alert("You Lose! LOSER!");
+            reset();
         }
     })
     // doing same thing but for rest of the doughnut images. 
@@ -35,14 +37,16 @@ $(document).ready(function () {
     console.log(random2)
     $("#d2").on("click", function () {
         counter += random2;
-        score();
-        alert("Your score is " + counter + " doughnuts!");
-
+        winLoss();
+        document.getElementById('yourScoreNumber').innerHTML = "Your Current Doughnuts " + counter;  
+    
         if (counter === targetNumber) {
             alert("You Win :)")
+            reset();
 
         } else if (counter >= targetNumber) {
             alert("You Lose! LOSER!");
+            reset();
         }
     });
 
@@ -51,14 +55,16 @@ $(document).ready(function () {
     console.log(random3)
     $("#d3").on("click", function () {
         counter += random3;
-        score();
-        alert("Your score is " + counter + " doughnuts!");
+        winLoss();
+        document.getElementById('yourScoreNumber').innerHTML = "Your Current Doughnuts " + counter;  
 
         if (counter === targetNumber) {
             alert("You Win :)")
+            reset();
 
         } else if (counter >= targetNumber) {
             alert("You Lose! LOSER!");
+            reset();
         }
     });
     var numberOptions4 = [6, 8, 4, 2];
@@ -66,20 +72,35 @@ $(document).ready(function () {
     console.log(random4)
     $("#d4").on("click", function () {
         counter += random4;
-        score();
-        alert("Your score is " + counter + " doughnuts!");
+        winLoss();
+        document.getElementById('yourScoreNumber').innerHTML = "Your Current Doughnuts " + counter;  
 
         if (counter === targetNumber) {
             alert("You Win :)")
-
+            reset();
         } else if (counter >= targetNumber) {
             alert("You Lose! LOSER!");
+            reset();
         }
     });
-    var score = function (){
+    //updates victories and losses
+    var winLoss = function (){
+        if(counter === targetNumber){
         victory++;
-        $("#victories").html(victory+1)
+        $("#victories").html(victory);
+    }
+    else if(counter >= targetNumber)
+    defeat++;
+    $("#defeats").html(defeat);
 };
+function reset() {
+counter = 0
+targetNumber = Math.floor(Math.random() * (120 - 20 + 1)) +20;
+$("yourScoreNumber").html(counter);
+$("#randomNumberParagraph").html(targetNumber); 
+        
+}
+
 
 });
 
